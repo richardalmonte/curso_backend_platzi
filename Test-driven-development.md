@@ -1,41 +1,41 @@
 # TDD: Estrategias realizar desarrollo orientado a pruebas
 
 ## Premisa y meta
-Seguramente al ser un desarrollador con experiencia, haz escuchado el termino "TDD"(Test Driven Development por sus siglas en inglÈs).
+Seguramente al ser un desarrollador con experiencia, haz escuchado el termino "TDD"(Test Driven Development por sus siglas en ingl√©s).
 Realmente es un tema muy interesante que es sencillo de investigar, basta con poco tiempo de busqueda en internet para encontrar diversas recomendaciones de como aplicarlo.
-Este ·rticulo parte con la siguiente premisa.
-En cuanto a "buenas pr·cticas" de como realizar TDD se refiere, podrÌamos encontrar diferentes formas de hacerlo, y a veces podrÌamos no estar de acuerdo, y esto se debe a que al final de cuentas,
-cuando a testing se refiere, todos podemos tener una opiniÛn distinta, y este articulo es eso, una opiniÛn.
-Pero algo se tiene en com˙n cuando encontramos los mejores tests. Y es que en la situaciÛn que lo encontramos, de alguna manera, tiene sentido.
-Este articulo es una opiniÛn mas, que pretende compartir algunas estrategias que podemos usar para escribir tests, orientado a desarrolladores de software.
+Este √°rticulo parte con la siguiente premisa.
+En cuanto a "buenas pr√°cticas" de como realizar TDD se refiere, podr√≠amos encontrar diferentes formas de hacerlo, y a veces podr√≠amos no estar de acuerdo, y esto se debe a que al final de cuentas,
+cuando a testing se refiere, todos podemos tener una opini√≥n distinta, y este articulo es eso, una opini√≥n.
+Pero algo se tiene en com√∫n cuando encontramos los mejores tests. Y es que en la situaci√≥n que lo encontramos, de alguna manera, tiene sentido.
+Este articulo es una opini√≥n mas, que pretende compartir algunas estrategias que podemos usar para escribir tests, orientado a desarrolladores de software.
 
-## IntroducciÛn: øQuÈ es un "test"?
+## Introducci√≥n: ¬øQu√© es un "test"?
 
 Antes de entender como hacer TDD, tenemos que tener bien claro que es un Test, en el contexto del desarrollo de software.
-Y para eso vale la pena preguntarnos, øcual es el objetivo del desarrollo de software en si?
+Y para eso vale la pena preguntarnos, ¬øcu√°l es el objetivo del desarrollo de software en s√≠?
 Regularmente... tiende a ser "solucionar un problema", y para aquellos que desarrollamos software como trabajo remunerado, generalmente
-esos problemas son del "cliente" (cliente en este contexto es lo mismo una empresa para la que trabajamos, un equipo de desarrollo que depende de nuestros desarrollos, o literalmente tu cliente si eres un freelancer, practicamente quien hara uso, consumira, tu software), con esto en consideraciÛn, no olvidemos lo que un cliente tiene(este conciente o no de ello), requerimientos de negocio.
+esos problemas son del "cliente" (cliente en este contexto es lo mismo una empresa para la que trabajamos, un equipo de desarrollo que depende de nuestros desarrollos, o literalmente tu cliente si eres un freelancer, pr√°cticamente quien har√° uso, consumir√°, tu software), con esto en consideraci√≥n, no olvidemos lo que un cliente tiene(est√© consciente o no de ello), requerimientos de negocio.
 
-Entonces, øque tiene que ver todo esto con un la definiciÛn de "test"?
+Entonces, ¬øque tiene que ver todo esto con un la definici√≥n de "test"?
 Un "Test", lo consideraremos entonces como aquel proceso el cual confirma que los requerimientos de negocio han sido satifechos.
 Pero cuidado, 
-Nota: Los requerimientos de negocio pueden ser explicitos, o implicitos. Por ejemplo. El "Cliente" puede explicitamente comunicar que el software X debe hacer la tarea A. Asi mismo el "cliente" podra no tener idea que el software que se desarrolla para el, recibira mas de 1000 peticiones por segundo en la hora con trafico pico en un dia determinado, y aunque no nos lo "pida" explicitamente, cuando eso suceda, se espera que el software siga funcionando. Desde cierto, es un requerimiento, y tambien se puede probar.
+Nota: Los requerimientos de negocio pueden ser expl√≠citos, o impl√≠citos. Por ejemplo. El "Cliente" puede expl√≠citamente comunicar que el software X debe hacer la tarea A. Asi mismo el "cliente" podr√° no tener idea que el software que se desarrolla para √©l, recibir√° mas de 1000 peticiones por segundo en la hora con trafico pico en un d√≠a determinado, y aunque no nos lo "pida" explicitamente, cuando eso suceda, se espera que el software siga funcionando. Desde cierto, es un requerimiento, y tambien se puede probar.
 
-## øQue tipos de "test" exÌsten?
+## ¬øQue tipos de "test" ex√≠sten?
 
 Seguro que muchisimo mas de los que un servidor puede memorizar, pero generalmente podemos categorizarlos en una escala con 2 extremos. Estas son:
 
-- Tests unitarios: Tests que prueban una funciÛn de manera atÛmica. En este extremo, un tests prueba en "teorÌa"(comentame por favor que encuentras en la pr·ctica) una sola cosa a la vÈz. Un ejemplo de este tipo de test, es cuando creamos una funciÛn est·tica que suma unicamente numeros "naturales", un solo test puede ser sumar dos numeros "naturales", otro test diferente, puede ser que la funciÛn lanza un error si se le da un numero que no esta dentro de la deficiÛn de numero "natural". Cada uno de estos dos tests seria un test atÛmico diferente, unitario, y prueban una sola cosa.
-Algunas de las **caracterÌsticas que encontramos comunmente en un buen test unitario** es que son mas f·ciles de automatizar, de involucrar en nuestro pipeline cuando implementamos continuous integration, y son mas rapidos de escribir, entender y tambiÈn de ejecutar(por ejemplo la ejecuciÛn del test de sumar 2 numeros tomar· milisegundos).
+- Tests unitarios: Tests que prueban una funci√≥n de manera at√≥mica. En este extremo, un tests prueba en "teor√≠a"(comentame por favor que encuentras en la pr√°ctica) una sola cosa a la v√©z. Un ejemplo de este tipo de test, es cuando creamos una funci√≥n est√°tica que suma unicamente numeros "naturales", un solo test puede ser sumar dos numeros "naturales", otro test diferente, puede ser que la funci√≥n lanza un error si se le da un numero que no esta dentro de la defici√≥n de numero "natural". Cada uno de estos dos tests seria un test at√≥mico diferente, unitario, y prueban una sola cosa.
+Algunas de las **caracter√≠sticas que encontramos comunmente en un buen test unitario** es que son mas f√°ciles de automatizar, de involucrar en nuestro pipeline cuando implementamos continuous integration, y son mas rapidos de escribir, entender y tambi√©n de ejecutar(por ejemplo la ejecuci√≥n del test de sumar 2 numeros tomar√° milisegundos).
 
-- Tests End to End: Al contrario de un test unitario, un test que se acerca mas al "End to End", no prueba una sola cosa, si no prueba un sistema completo de inicio a fin(por ello el nombre End to End). Esto quiere decir que un solo test involucrar· a un sistema completo, incluyendo sus componentes. Por ejemplo, si tenemos una aplicaciÛn que se asemeje a una red social popular, un unico test puede involucrar pasos como los siguientes:
-*Desde la UI en un navegador Web X. 1. Abrir la p·gina principal, registrar una cuenta(y toda la validaciÛn que eso conlleva), hacer login, mandar un post, aÒadir contactos, hacer login como los contactos, validar que se puede ver el post publicado anteriormente, cambiar la profile pic, validar que todos lo pueden ver, hacer un post, quitar el post, validar que en menos de X segundos los contactos que originalmente podian ver el post ya no pueden verlo...etc...etc...etc*
-Espero que con el ejemplo anterior se entienda el punto. Pero por supuesto los Test verdaderamente "End to End" en el contexto purista de la palabra, son muy dificiles de escribir, considerar todos los casos de uso, y sobretodo automatizar. Por lo que es mas com˙n que estemos en un lugar "en medio" de estos dos extremos, y probar solo ciertas integraciones entre los componentes de un sistema dependiendo de cada situaciÛn (øAlguna vez escuchaste el termino test de integraciÛn?). 
-Nota: Tests de.. "integraciÛn", "UI", incluso "Performance" pudieran ser desde cierto punto de vista, tests de "integraciÛn" en cierto grado, ya que estan probando el sistema en si, el cual funciona gracias a como sus componentes estan "integrados" entre si.
+- Tests End to End: Al contrario de un test unitario, un test que se acerca mas al "End to End", no prueba una sola cosa, si no prueba un sistema completo de inicio a fin(por ello el nombre End to End). Esto quiere decir que un solo test involucrar√° a un sistema completo, incluyendo sus componentes. Por ejemplo, si tenemos una aplicaci√≥n que se asemeje a una red social popular, un unico test puede involucrar pasos como los siguientes:
+*Desde la UI en un navegador Web X. 1. Abrir la p√°gina principal, registrar una cuenta(y toda la validaci√≥n que eso conlleva), hacer login, mandar un post, a√±adir contactos, hacer login como los contactos, validar que se puede ver el post publicado anteriormente, cambiar la profile pic, validar que todos lo pueden ver, hacer un post, quitar el post, validar que en menos de X segundos los contactos que originalmente podian ver el post ya no pueden verlo...etc...etc...etc*
+Espero que con el ejemplo anterior se entienda el punto. Pero por supuesto los Test verdaderamente "End to End" en el contexto purista de la palabra, son muy dificiles de escribir, considerar todos los casos de uso, y sobretodo automatizar. Por lo que es mas com√∫n que estemos en un lugar "en medio" de estos dos extremos, y probar solo ciertas integraciones entre los componentes de un sistema dependiendo de cada situaci√≥n (¬øAlguna vez escuchaste el termino test de integraci√≥n?). 
+Nota: Tests de.. "integraci√≥n", "UI", incluso "Performance" pudieran ser desde cierto punto de vista, tests de "integraci√≥n" en cierto grado, ya que estan probando el sistema en si, el cual funciona gracias a como sus componentes estan "integrados" entre si.
 
-## øComo aplicar entonces TDD de forma pr·ctica?
-Ahora sÌ, me ahorrare el "template" de "Escribe tests primero y luego el cÛdigo", eso es muy f·cil encontrarlo y hay personas muchisimo m·s experimentadas que un servidor para brindar esa informaciÛn.
-Sin embargo, los consejos pr·cticos, repito. En la opiniÛn de su servidor. Estos consejos personalmente me han traido "paz mental" al desarrollar software, y espero que alguno de estos consejos, te traiga esa paz mental a tÌ tambien.
+## ¬øComo aplicar entonces TDD de forma pr√°ctica?
+Ahora s√≠, me ahorrare el "template" de "Escribe tests primero y luego el c√≥digo", eso es muy f√°cil encontrarlo y hay personas muchisimo m√°s experimentadas que un servidor para brindar esa informaci√≥n.
+Sin embargo, los consejos pr√°cticos, repito. En la opini√≥n de su servidor. Estos consejos personalmente me han traido "paz mental" al desarrollar software, y espero que alguno de estos consejos, te traiga esa paz mental a t√≠ tambien.
 
 ### Definir bien el requerimiento de negocio antes de hacer un plan de testing 
 Recordando a nuestro "cliente" del que hablamos antes. Primero tenemos que entender que nos estan pidiendo de manera explicita, y que se espera de manera implicita.
@@ -46,17 +46,17 @@ Como ejercicio, plantea todos los casos de uso posibles para los servicios en el
 Como ejemplo, estos son algunos que pudiera imaginarme en un sistema de una "red social" (No estrictamente unitarios, end to end, o en puntos medios).
 - En el contexto de un "Post" en una red social.
     * Cuando se publica un post, solo los contactos que me siguen seran notificados.
-    * Cuando se publica un post e inmediatamente despues de que el post se propago a todos los datacenters en el mundo, se elimina. Transcurridos un maximo de 10 segundos, ning˙n contacto deber· ser capaz de visualizar el post eliminado (considerar que el post).
+    * Cuando se publica un post e inmediatamente despues de que el post se propago a todos los datacenters en el mundo, se elimina. Transcurridos un maximo de 10 segundos, ning√∫n contacto deber√° ser capaz de visualizar el post eliminado (considerar que el post).
 - En el contexto de "grupos" en una red social.
-    * Cuando se aÒade un usuario nuevo a un grupo, solicitar la autorizaciÛn del creador original del grupo si el 5% o mas de los usuarios ya en el grupo tienen bloqueado al usuario que se intenta aÒadir.
-    * No se puede aÒadir usuarios a grupos en donde se encuentren menores de edad, si el usuario tiene un "strike" o se ha detectado que publica contenido no apto para menores de edad con una frecuencia determinada.
-    * En caso de que simultaneamente se aÒade el usuario A a un grupo, se envian notificaciones a los integrantes, pero al mismo tiempo el usuario A elimina su cuenta. El sistema debe de recuperarse automaticamente en un m·ximo de 2 minutos, cancelando todas las notificaciones enviadas y eliminandolo automaticamente del grupo al que se aÒadio.  
+    * Cuando se a√±ade un usuario nuevo a un grupo, solicitar la autorizaci√≥n del creador original del grupo si el 5% o mas de los usuarios ya en el grupo tienen bloqueado al usuario que se intenta a√±adir.
+    * No se puede a√±adir usuarios a grupos en donde se encuentren menores de edad, si el usuario tiene un "strike" o se ha detectado que publica contenido no apto para menores de edad con una frecuencia determinada.
+    * En caso de que simultaneamente se a√±ade el usuario A a un grupo, se envian notificaciones a los integrantes, pero al mismo tiempo el usuario A elimina su cuenta. El sistema debe de recuperarse automaticamente en un m√°ximo de 2 minutos, cancelando todas las notificaciones enviadas y eliminandolo automaticamente del grupo al que se a√±adio.  
 
 ### Estructurando y escribiendo un Test
 Si bien somos libres de elegir la estructura que deseemos, una forma efectiva que puede ayudar a tener una mejor legibilidad. Es la siguiente:
 1. Realizar el Setup: Preparar todas las variables o valores que necesitemos en nuestro test, antes de ejecutar el caso de uso que queremos probar.
-2. Realizar la ejecuciÛn del caso de uso.
-3. Realizar la validaciÛn de lo que esperamos (Y esto incluye tambiÈn lo que NO esperamos).
+2. Realizar la ejecuci√≥n del caso de uso.
+3. Realizar la validaci√≥n de lo que esperamos (Y esto incluye tambi√©n lo que NO esperamos).
 
 Ej. en contexto de la red social. Este test pudiera abstraer la interaccion entre multiples componentes de un sistema
 Como lo puede ser desde el registro de una cuenta, hacer un login, y enviar peticiones autenticadas a diferentes APIs.
